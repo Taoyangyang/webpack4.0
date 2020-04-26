@@ -1,1 +1,1 @@
-console.log("====secondJs=====")
+console.log('====secondJs=====');
