@@ -57,7 +57,7 @@ module.exports = { // 配置正式开始
     disableHostCheck: true,
     contentBase: './dist', // 我们把编译后的目录 定为发布目录
     compress: true, // 是否展示进度条
-    host: 'localhost', // host地址
+    host: '0.0.0.0', // host地址
     port: 9000, // 开发环境启动端口
     proxy: {
       '/action': 'http://127.0.0.1:8080/'
@@ -98,22 +98,22 @@ module.exports = { // 配置正式开始
         options: {
           presets: [
             ['@babel/preset-env', // 使用这个预设，会根据浏览器来选择插件转化ES5
-            {
-              // 按需加载
-              useBuiltIns: 'usage',
-              // 指定core-js版本
-              corejs: {
-                version: 3
-              },
-              // 指定兼容性做到哪个版本的浏览器
-              targets: {
-                chrome: '60',
-                firefox: '60',
-                ie: '9',
-                safari: '10',
-                edge: '17'
-              }
-            }]
+              {
+                // 按需加载
+                useBuiltIns: 'usage',
+                // 指定core-js版本
+                corejs: {
+                  version: 3
+                },
+                // 指定兼容性做到哪个版本的浏览器
+                targets: {
+                  chrome: '60',
+                  firefox: '60',
+                  ie: '9',
+                  safari: '10',
+                  edge: '17'
+                }
+              }]
           ]
         }
       }]
@@ -160,6 +160,15 @@ module.exports = { // 配置正式开始
     {
       test: /\.html$/,
       loader: 'html-loader',  // 处理html文件中的图片，负责引入img，从未能被url-loader或file-loader处理
+    }, {
+      test: /\.txt$/,
+      loader: resolve('./src/loader/addAuthor.js'),
+      options: {
+        author: '陶冶',
+        date: new Date().toLocaleString(),
+        pName: '崇文',
+        name: './assets/index.txt',
+      }
     }]
   },
   // 插件 相关配置
